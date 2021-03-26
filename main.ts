@@ -5,7 +5,7 @@ namespace SpriteKind {
 let rythmbarRed: Sprite = null
 let rythmbar: Sprite = null
 let tempo = 0
-let mySprite: Sprite = null
+let waitScreen: Sprite = null
 pause(100)
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -131,16 +131,35 @@ scene.setBackgroundImage(img`
     `)
 let start = 0
 while (!(start)) {
-    mySprite = sprites.create(assets.image`pressA`, SpriteKind.wait)
-    if (controller.A.isPressed()) {
-        start += 1
-        tempo = 100
-        rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.rythm)
-        rythmbarRed = sprites.create(assets.image`myImage2`, SpriteKind.rythm)
-        rythmbar.setPosition(80, 15)
-        rythmbarRed.setPosition(25, 15)
+    while (!(controller.A.isPressed())) {
+        waitScreen = sprites.create(assets.image`pressA`, SpriteKind.wait)
+        pause(200)
+        waitScreen.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
     }
-    pause(50)
+    start += 1
+    tempo = 100
+    rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.rythm)
+    rythmbarRed = sprites.create(assets.image`myImage2`, SpriteKind.rythm)
+    rythmbar.setPosition(80, 15)
+    rythmbarRed.setPosition(25, 15)
+    waitScreen.destroy()
 }
 while (start) {
     if (rythmbarRed.x <= 145) {
