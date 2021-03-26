@@ -1,9 +1,11 @@
 namespace SpriteKind {
     export const rythm = SpriteKind.create()
+    export const wait = SpriteKind.create()
 }
 let rythmbarRed: Sprite = null
 let rythmbar: Sprite = null
 let tempo = 0
+let mySprite: Sprite = null
 pause(100)
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -129,8 +131,8 @@ scene.setBackgroundImage(img`
     `)
 let start = 0
 while (!(start)) {
+    mySprite = sprites.create(assets.image`pressA`, SpriteKind.wait)
     if (controller.A.isPressed()) {
-        pause(100)
         start += 1
         tempo = 100
         rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.rythm)
@@ -138,6 +140,7 @@ while (!(start)) {
         rythmbar.setPosition(80, 15)
         rythmbarRed.setPosition(25, 15)
     }
+    pause(50)
 }
 while (start) {
     if (rythmbarRed.x < 145) {
