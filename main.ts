@@ -130,7 +130,9 @@ scene.setBackgroundImage(img`
     `)
 let start = 0
 let rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.static)
+rythmbar.setPosition(80, 15)
 let rythmbarRed = sprites.create(assets.image`myImage2`, SpriteKind.rythm)
+rythmbarRed.setPosition(25, 15)
 while (!(start)) {
     while (!(controller.A.isPressed())) {
         waitScreen = sprites.create(assets.image`pressA`, SpriteKind.wait)
@@ -157,14 +159,15 @@ while (!(start)) {
     }
     start += 1
     tempo = 100
-    rythmbarRed.setPosition(25, 15)
-    rythmbar.setPosition(80, 15)
 }
+rythmbarRed.setVelocity(tempo / 10, 0)
 forever(function () {
     while (start) {
-        rythmbarRed.setVelocity(tempo / 10, 0)
         if (rythmbarRed.x >= 145) {
             rythmbarRed.setPosition(25, 15)
         }
+        pause(1000)
+        tempo += 5
+        rythmbarRed.setVelocity(tempo / 10, 0)
     }
 })
