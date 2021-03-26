@@ -1,3 +1,25 @@
+@namespace
+class SpriteKind:
+    rythm = SpriteKind.create()
+    wait = SpriteKind.create()
+    static = SpriteKind.create()
+
+def on_on_created(sprite):
+    global tempo
+    tempo = 100
+    rythmbarRed.set_position(25, 15)
+    while start:
+        rythmbarRed.set_velocity(tempo / 10, 0)
+        if rythmbarRed.x >= 145:
+            rythmbarRed.set_position(25, 15)
+sprites.on_created(SpriteKind.rythm, on_on_created)
+
+tempo = 0
+rythmbar: Sprite = None
+rythmbarRed: Sprite = None
+waitScreen: Sprite = None
+start = 0
+pause(100)
 scene.set_background_image(img("""
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -120,3 +142,37 @@ scene.set_background_image(img("""
         eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 """))
+start = 0
+while not (start):
+    while not (controller.A.is_pressed()):
+        waitScreen = sprites.create(assets.image("""
+            pressA
+        """), SpriteKind.wait)
+        pause(200)
+        waitScreen.set_image(img("""
+            . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . . 
+                        . . . . . . . . . . . . . . . .
+        """))
+        pause(200)
+    start += 1
+    rythmbarRed = sprites.create(assets.image("""
+        myImage2
+    """), SpriteKind.rythm)
+    rythmbar = sprites.create(assets.image("""
+        ref_bar
+    """), SpriteKind.static)
+    rythmbar.set_position(80, 15)

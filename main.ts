@@ -1,9 +1,8 @@
 namespace SpriteKind {
     export const rythm = SpriteKind.create()
     export const wait = SpriteKind.create()
+    export const static = SpriteKind.create()
 }
-let rythmbarRed: Sprite = null
-let rythmbar: Sprite = null
 let tempo = 0
 let waitScreen: Sprite = null
 pause(100)
@@ -130,6 +129,8 @@ scene.setBackgroundImage(img`
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     `)
 let start = 0
+let rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.static)
+let rythmbarRed = sprites.create(assets.image`myImage2`, SpriteKind.rythm)
 while (!(start)) {
     while (!(controller.A.isPressed())) {
         waitScreen = sprites.create(assets.image`pressA`, SpriteKind.wait)
@@ -152,25 +153,18 @@ while (!(start)) {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `)
+        pause(200)
     }
     start += 1
     tempo = 100
-    rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.rythm)
-    rythmbarRed = sprites.create(assets.image`myImage2`, SpriteKind.rythm)
-    rythmbar.setPosition(80, 15)
     rythmbarRed.setPosition(25, 15)
-    waitScreen.destroy()
-}
-while (start) {
-    if (rythmbarRed.x <= 145) {
-        rythmbarRed.setVelocity(tempo / 10, 0)
-    } else {
-        rythmbarRed.setPosition(25, 15)
-    }
+    rythmbar.setPosition(80, 15)
 }
 forever(function () {
-    pause(1000)
     while (start) {
-        tempo += 1
+        rythmbarRed.setVelocity(tempo / 10, 0)
+        if (rythmbarRed.x >= 145) {
+            rythmbarRed.setPosition(25, 15)
+        }
     }
 })
