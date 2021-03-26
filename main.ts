@@ -143,8 +143,8 @@ while (!(start)) {
     pause(50)
 }
 while (start) {
-    if (rythmbarRed.x < 145) {
-        rythmbarRed.setVelocity(tempo, 0)
+    if (rythmbarRed.x <= 145) {
+        rythmbarRed.setVelocity(tempo / 10, 0)
     } else {
         rythmbarRed.setPosition(25, 15)
     }
