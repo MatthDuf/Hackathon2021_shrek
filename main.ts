@@ -3,8 +3,8 @@ namespace SpriteKind {
 }
 let rythmbarRed: Sprite = null
 let rythmbar: Sprite = null
-let start = 0
-let tempo = 100
+let tempo = 0
+pause(100)
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -127,23 +127,25 @@ scene.setBackgroundImage(img`
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     `)
+let start = 0
 while (!(start)) {
     if (controller.A.isPressed()) {
+        pause(100)
         start += 1
+        tempo = 100
+        rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.rythm)
+        rythmbarRed = sprites.create(assets.image`myImage2`, SpriteKind.rythm)
+        rythmbar.setPosition(80, 15)
+        rythmbarRed.setPosition(25, 15)
     }
 }
-forever(function () {
-    rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.rythm)
-    rythmbarRed = sprites.create(assets.image`myImage2`, SpriteKind.rythm)
-    rythmbar.setPosition(0, 15)
-    while (start) {
-        if (rythmbarRed.x < 160) {
-            rythmbarRed.setVelocity(tempo, 0)
-        } else {
-            rythmbarRed.setPosition(0, 15)
-        }
+while (start) {
+    if (rythmbarRed.x < 145) {
+        rythmbarRed.setVelocity(tempo, 0)
+    } else {
+        rythmbarRed.setPosition(25, 15)
     }
-})
+}
 forever(function () {
     pause(1000)
     while (start) {
