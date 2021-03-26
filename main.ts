@@ -1,4 +1,10 @@
+namespace SpriteKind {
+    export const rythm = SpriteKind.create()
+}
+let rythmbarRed: Sprite = null
+let rythmbar: Sprite = null
 let start = 0
+let tempo = 100
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -122,5 +128,24 @@ scene.setBackgroundImage(img`
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     `)
 while (!(start)) {
-	
+    if (controller.A.isPressed()) {
+        start += 1
+    }
 }
+forever(function () {
+    rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.rythm)
+    rythmbarRed = sprites.create(assets.image`myImage2`, SpriteKind.rythm)
+    while (start) {
+        if (rythmbarRed.x < 160) {
+            rythmbarRed.setVelocity(tempo, 0)
+        } else {
+            rythmbarRed.setPosition(0, 15)
+        }
+    }
+})
+forever(function () {
+    pause(1000)
+    while (start) {
+        tempo += 1
+    }
+})
