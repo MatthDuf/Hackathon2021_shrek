@@ -135,6 +135,7 @@ while (!(start)) {
 forever(function () {
     rythmbar = sprites.create(assets.image`ref_bar`, SpriteKind.rythm)
     rythmbarRed = sprites.create(assets.image`myImage2`, SpriteKind.rythm)
+    rythmbar.setPosition(0, 15)
     while (start) {
         if (rythmbarRed.x < 160) {
             rythmbarRed.setVelocity(tempo, 0)
